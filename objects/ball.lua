@@ -9,6 +9,7 @@ function Ball:new(x,y)
     self.h = 10
     self.speed = 200
     self.angle = 0.01
+    self.color = {r = 0, g = 1,b = 1}
 end
 
 function Ball:update(dt)
@@ -27,7 +28,9 @@ function Ball:update(dt)
 end
 
 function Ball:draw()
+    love.graphics.setColor(self.color.r, self.color.g, self.color.b)
     love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
+    love.graphics.setColor(1,1,1)
 end
 
 function Ball:genAngle()
