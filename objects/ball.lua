@@ -20,6 +20,7 @@ function Ball:update(dt)
 
     if self.x < 0 or self.x > (config.window.width - self.w) or self.y < 0 or self.y > (config.window.height - self.h) then
         self.speed = -self.speed
+        self:genAngle()
     end
 
     if love.mouse.isDown(1) then
