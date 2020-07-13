@@ -9,6 +9,8 @@ local balls = {}
 
 function love.load(args)
 
+    if not args[1] then args[1] = 0 end
+
     for i=1,args[1] do
         local rx = love.math.random(10,770)
         local ry = love.math.random(10,580)
