@@ -1,11 +1,13 @@
 local Paddle = require "objects/paddle"
 local Ball = require "objects/ball"
+local Bullet = require "objects/bullet"
 
 local windowWidth = config.window.width
 local p = Paddle(10, 580)
 local b = Ball(40,40)
 
 local balls = {}
+local bullets = {}
 
 function love.load(args)
 
@@ -23,6 +25,8 @@ function love.load(args)
         ball.color.b = rb
 
         table.insert(balls, ball)
+        local bullet = Bullet(p.x + (p.w / 2),p.y)
+        table.insert(bullets, bullet)
     end
 
     love.mouse.setVisible(false)
@@ -32,8 +36,14 @@ function love.update(dt)
     p:update(dt)
     b:update(dt)
 
-    for _,ball in pairs(balls) do
-        ball:update(dt)
+    if love.mouse.isDown(1) then
+        local bullet = Bullet(p.x,p.y)
+        table.insert(bullets, bullet)
+    end
+
+
+    for _,bullet in pairs(bullets) do
+        bullet:update(dt)
     end
 end
 
@@ -42,7 +52,7 @@ function love.draw()
     love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
     p:draw()
     b:draw()
-    for _,ball in pairs(balls) do
-        ball:draw()
+    for _,bullet in pairs(bullets) do
+        bullet:draw()
     end
 end
