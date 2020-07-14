@@ -7,13 +7,14 @@ function Bullet:new(x,y)
     self.y = y
     self.w = 5
     self.h = 5
-    self.speed = 200
+    self.speed = 12000
     self.angle = 0.01
     self.damage = 1
-    self.color = {r = 1, g = 0.6,b = 0.4}
+    self.color = {r = 1, g = 0.1,b = 0.4}
 end
 
 function Bullet:update(dt)
+    self.y = self.y - self.speed * math.sin(self.angle) * dt
 end
 
 function Bullet:draw()
