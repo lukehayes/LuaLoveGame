@@ -5,6 +5,8 @@ local Bullet = require "objects/bullet"
 local windowWidth = config.window.width
 local p = Paddle(10, 580)
 local b = Ball(40,40)
+local rechargeRate = 2.5
+local recharger = 0
 
 local balls = {}
 local bullets = {}
@@ -36,9 +38,12 @@ function love.update(dt)
     p:update(dt)
     b:update(dt)
 
-    if love.mouse.isDown(1) then
+    recharger = recharger + 0.1
+
+    if love.mouse.isDown(1) and recharger > rechargeRate then
         local bullet = Bullet(p.x + (p.w / 2) ,p.y + (p.h / 2))
         table.insert(bullets, bullet)
+        recharger = 0
     end
 
 
