@@ -1,10 +1,12 @@
 local Paddle = require "objects/paddle"
 local Ball = require "objects/ball"
 local Bullet = require "objects/bullet"
+local Sound = require "objects/sound"
 
 local windowWidth = config.window.width
 local p = Paddle(10, 580)
 local b = Ball(40,40)
+local s = Sound("assets/blip.mp3")
 local rechargeRate = 2.5
 local recharger = 0
 
@@ -21,8 +23,6 @@ function genBall(tbl)
     ball.color.r = rr
     ball.color.g = rg
     ball.color.b = rb
-
-    print("Red " .. rr)
 
     table.insert(tbl, ball)
 end
@@ -57,6 +57,7 @@ function love.update(dt)
         local bullet = Bullet(p.x + (p.w / 2) ,p.y + (p.h / 2))
         table.insert(bullets, bullet)
         recharger = 0
+        Sound:play()
     end
 
     for _,ball in pairs(balls) do
