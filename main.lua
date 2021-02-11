@@ -50,9 +50,13 @@ end
 
 function love.draw()
     love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
-    p:draw()
+
+    -- Draw all objects
     b:draw()
+
     for _,bullet in pairs(bullets) do
         bullet:draw()
     end
+
+    p:draw()
 end
