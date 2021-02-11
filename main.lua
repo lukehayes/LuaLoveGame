@@ -37,7 +37,7 @@ function love.update(dt)
     b:update(dt)
 
     if love.mouse.isDown(1) then
-        local bullet = Bullet(p.x,p.y)
+        local bullet = Bullet(p.x + (p.w / 2) ,p.y + (p.h / 2))
         table.insert(bullets, bullet)
     end
 
