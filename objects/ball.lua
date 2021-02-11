@@ -10,6 +10,7 @@ function Ball:new(x,y)
     self.speed = 200
     self.angle = 0.01
     self.color = {r = 0, g = 1,b = 1}
+    self:genAngle()
 end
 
 function Ball:update(dt)
