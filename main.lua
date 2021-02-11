@@ -54,6 +54,8 @@ end
 
 
 function love.draw()
+
+    love.graphics.clear(0.05,0.05,0.1,1)
     love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
     -- Draw all objects
