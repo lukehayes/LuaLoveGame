@@ -11,25 +11,38 @@ local recharger = 0
 local balls = {}
 local bullets = {}
 
+function genBall(tbl)
+    local rx = love.math.random(10,770)
+    local ry = love.math.random(10,580)
+    local rr = love.math.random(0,7) / 10
+    local rg = love.math.random(0,3) / 10
+    local rb = love.math.random(0,9) / 10
+    local ball = Ball(rx,ry)
+    ball.color.r = rr
+    ball.color.g = rg
+    ball.color.b = rb
+
+    print("Red " .. rr)
+
+    table.insert(tbl, ball)
+end
+
 function love.load(args)
 
-    if not args[1] then args[1] = 0 end
+    if not args[1] then print("Not") args[1] = 0 end
+    local c = 0
 
     for i=1,args[1] do
-        local rx = love.math.random(10,770)
-        local ry = love.math.random(10,580)
-        local rr = love.math.random(0,1)
-        local rg = love.math.random(0,1)
-        local rb = love.math.random(0,1)
-        local ball = Ball(rx,ry)
-        ball.color.r = rr
-        ball.color.g = rg
-        ball.color.b = rb
+
+        genBall(balls)
 
         table.insert(balls, ball)
         local bullet = Bullet(p.x + (p.w / 2),p.y)
         table.insert(bullets, bullet)
+        c = c + 1
     end
+
+    print("Called: " .. c .. " times.")
 
     love.mouse.setVisible(false)
 end
@@ -46,6 +59,9 @@ function love.update(dt)
         recharger = 0
     end
 
+    for _,ball in pairs(balls) do
+        ball:update(dt)
+    end
 
     for _,bullet in pairs(bullets) do
         bullet:update(dt)
@@ -59,7 +75,10 @@ function love.draw()
     love.graphics.print("Current FPS: "..tostring(love.timer.getFPS( )), 10, 10)
 
     -- Draw all objects
-    b:draw()
+
+    for _,ball in pairs(balls) do
+        ball:draw()
+    end
 
     for _,bullet in pairs(bullets) do
         bullet:draw()
