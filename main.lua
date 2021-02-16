@@ -1,8 +1,10 @@
 local mapObject = require "assets/maps/debug/map"
 local mapImage = love.graphics.newImage("assets/maps/debug/tiles.png")
 local tiles = {}
-local tileX = 8
-local tileY = 8
+local mapWidth = mapObject.width
+local mapHeight = mapObject.height
+local tileX = mapObject.tilewidth
+local tileY = mapObject.tileheight
 local tileScale = 2
 
 
@@ -15,15 +17,35 @@ end
 
 
 function love.draw()
-    local c = 100
-    for k,v in pairs(tiles) do
-        c = c + 10
-        love.graphics.draw(mapImage,v, c,100)
+
+    local c = 0
+    --for _,obj in pairs(mapObject.layers) do
+
+        --if obj.data ~= nil then
+            --for _,tile in pairs(obj.data) do
+                --love.graphics.draw(mapImage, tiles[tile])
+
+            --end
+        --else
+            --break
+        --end
+    --end
+    --
+    
+    for k,v in pairs(mapObject.layers) do
+
+        for i=1,mapWidth do
+            print(i)
+        end
+
     end
+
+
+    --love.graphics.draw(mapImage,tiles[1], c,100)
 end
 
 function loadTiles()
-    for i = 1,4 do
+    for i = 0,4 do
         local quad = love.graphics.newQuad(
                     i * tileX,
                     0,
