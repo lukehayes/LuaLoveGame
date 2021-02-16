@@ -5,7 +5,24 @@ local tileX = 8
 local tileY = 8
 local tileScale = 2
 
+
 function love.load(args)
+    loadTiles()
+end
+
+function love.update(dt)
+end
+
+
+function love.draw()
+    local c = 100
+    for k,v in pairs(tiles) do
+        c = c + 10
+        love.graphics.draw(mapImage,v, c,100)
+    end
+end
+
+function loadTiles()
     for i = 1,4 do
         local quad = love.graphics.newQuad(
                     i * tileX,
@@ -20,17 +37,5 @@ function love.load(args)
 
     for k,v in pairs(tiles) do
         print(k, v)
-    end
-end
-
-function love.update(dt)
-end
-
-
-function love.draw()
-    local c = 100
-    for k,v in pairs(tiles) do
-        c = c + 10
-        love.graphics.draw(mapImage,v, c,100)
     end
 end
