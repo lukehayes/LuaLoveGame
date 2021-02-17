@@ -10,6 +10,7 @@ local tileScale = 2
 
 function love.load(args)
     loadTiles()
+    print(tiles[1])
 end
 
 function love.update(dt)
@@ -18,30 +19,29 @@ end
 
 function love.draw()
 
-    local c = 0
-    --for _,obj in pairs(mapObject.layers) do
+    local y = 0
 
-        --if obj.data ~= nil then
-            --for _,tile in pairs(obj.data) do
-                --love.graphics.draw(mapImage, tiles[tile])
+    for k,layer in pairs(mapObject.layers) do
 
-            --end
-        --else
-            --break
-        --end
-    --end
-    --
-    
-    for k,v in pairs(mapObject.layers) do
+        if layer.name == "Collisions" then break end
 
-        for i=1,mapWidth do
-            print(i)
+        print("Loading " .. layer.name)
+        print("Length: " .. #layer.data)
+
+        for x=1, #layer.data do
+            --love.graphics.draw(mapImage,tiles[x], x * tileX, y * tileY)
+
+            print(x, y)
+            
+           if x == 20 then y = y + 20 end
+        end
+
+
+        for i=0,4 do
+            love.graphics.draw(mapImage,tiles[i], i * 2, i * 2)
         end
 
     end
-
-
-    --love.graphics.draw(mapImage,tiles[1], c,100)
 end
 
 function loadTiles()
@@ -55,9 +55,5 @@ function loadTiles()
          )
 
          table.insert(tiles, quad)
-    end
-
-    for k,v in pairs(tiles) do
-        print(k, v)
     end
 end
