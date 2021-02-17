@@ -29,23 +29,23 @@ function love.draw()
         print("Length: " .. #layer.data)
 
         for x=1, #layer.data do
-            --love.graphics.draw(mapImage,tiles[x], x * tileX, y * tileY)
+            love.graphics.draw(mapImage,tiles[layer.id], x * tileX, y * tileY)
 
             print(x, y)
             
-           if x == 20 then y = y + 20 end
+           if x % 20 == 0 then y = y + 1 end
         end
 
 
-        for i=0,4 do
-            love.graphics.draw(mapImage,tiles[i], i * 2, i * 2)
+        for i=1,4 do
+            love.graphics.draw(mapImage,tiles[i], i * 10, i * 10)
         end
 
     end
 end
 
 function loadTiles()
-    for i = 0,4 do
+    for i = 0,5 do
         local quad = love.graphics.newQuad(
                     i * tileX,
                     0,
